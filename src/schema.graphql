@@ -1,0 +1,51 @@
+# import Post from "./generated/prisma.graphql"
+
+type Query {
+    feed: [Post!]!
+    drafts: [Post!]!
+    post(id: ID!): Post
+    me: User
+}
+
+type Mutation {
+    signup(email: String!, password: String!, name: String!): AuthPayload!
+    login(email: String!, password: String!): AuthPayload!
+    createPost(title: String!, text: String!): Post!
+    like(id : ID!) : Post!
+    deletePost(id: ID!): Post!
+}
+
+type Subscription {
+    feedSubscription: PostSubscriptionPayload!
+    postSubscription: PostSubscriptionPayload!
+}
+
+type AuthPayload {
+    token: String!
+    user: User!
+}
+
+type User {
+    id: ID!
+    email: String!
+    name: String!
+    writtenPosts: [Post!]!
+}
+
+type Post {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    title: String!
+    text: String!
+    author : User!
+    likes : [User!]
+    comments : [Comment!]!
+}
+
+type Comment {
+    id : ID!
+    text : String!
+    likes: [User!]!
+    createdAt: DateTime!
+}

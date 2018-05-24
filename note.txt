@@ -1,0 +1,32 @@
+# Try to write your query here
+query ALL_USER{
+  users{
+    id
+    email
+    likedPosts{
+      id
+    }
+    writtenPosts{
+      id
+    }
+  }
+}
+mutation LIKES {
+  updatePost (where : {id : "cjhgveceqts1k0f56vvzcomwu"},
+  data : {likes : {
+    update : [
+      {
+        where : { id : "cjhgsmbu9tg470f564oxsoh6x"},
+        data : {
+        likes : {
+              connect : { email :"developer@example.com" }
+            }
+        }
+
+    }]
+  }
+  })
+
+  { updatedAt}
+}
+

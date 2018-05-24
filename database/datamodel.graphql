@@ -1,0 +1,27 @@
+type User {
+    id: ID! @unique
+    email: String! @unique
+    password: String!
+    name: String!
+    writtenPosts: [Post!]! @relation(name: "WrittenPosts")
+}
+
+type Post {
+    id: ID! @unique
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    isPublished: Boolean! @default(value: "false")
+    title: String!
+    text: String!
+    author: User!  @relation(name: "WrittenPosts")
+    likes: [User!]!  @relation(name: "LikedPosts")
+    comments : [Comment!]!
+}
+
+type Comment {
+    id : ID! @unique
+    text : String!
+    likes: [User!]!
+    createdAt: DateTime!
+}
+

@@ -1,0 +1,29 @@
+query ALL_USER{
+    users{
+        id
+        email
+        writtenPosts{
+            id
+        }
+    }
+}
+
+query ALL_POSTS {
+    posts {
+        id
+        title
+        text
+        likes {
+            email
+        }
+    }
+}
+mutation LIKES {
+    updatePost (where : {id : "cjhgveceqts1k0f56vvzcomwu"},
+        data : {
+            likes : {
+                connect : { email :"developer@example.com" }
+            }
+        })
+    {updatedAt}
+}
